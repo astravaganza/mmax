@@ -76,12 +76,33 @@ class ManoraMAX(object):
 
         logger.info("Saved to device.json!")
 
+    def login(self) -> None:
+        s = self.session.post(url=config.LOGIN_URL, headers={
+            "user-agent": config.UA_MMAX,
+            "X-Package-Name": config.PACKAGE_NAME,
+            "X-Certificate-Fingerprint": config.CERT_FP
+        }, data={
+            "password": config.PASSWORD,
+            "grant_type": "password",
+            "scope": "email mobile openid profile offline_access",
+            "client_id": "max-apalya-prod-android",
+            "username": config.EMAIL
+        })
+
+        if s.status_code != 200:
+            logger.error("Likely wrong credentials!")
+        else:
+            with open("tokens.json", "w") as f:
+                json.dump(s.json(), f, indent=4)
+                logger.info("Tokens saved to tokens.json!")
+
 
 @logger.catch
 def main() -> None:
     logger.info("Welcome to ManoraMAX!")
     manoramax = ManoraMAX()
     manoramax.register_device()
+    manoramax.login()
 
 
 if __name__ == "__main__":

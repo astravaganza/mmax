@@ -1,5 +1,6 @@
 # API Paths
 REGISTER_URL = 'https://apimyplex.manoramamax.com/user/v3/registerDevice'
+LOGIN_URL = 'https://id.manoramaonline.com/token'
 
 # Credentials
 EMAIL = ''
