@@ -1,5 +1,5 @@
 # mmax
-ManoramaMax login client based on their android application, implemented in Python.
+ManoramaMax device registration and login client based on their android application, implemented in Python.
 
 ## Steps
 * Install `requirements.txt`
